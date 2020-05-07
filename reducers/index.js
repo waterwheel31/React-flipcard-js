@@ -31,17 +31,54 @@ export default function decks(state = {}, action) {
       };
 
     case ADD_CARD:
+      console.log('reducer, ADD_CARD')
       const deckId = action.deckId;
       const card = action.card;
+      console.log('deckId:', deckId)
+      console.log('card:', card)
+      if (state.decks[deckId].cards.length === undefined){
+        return {
+          ...state,
+          decks:{
+            ...state.decks,
+            [deckId]:{
+              ...state.decks[deckId],
+              numCard: state.decks[deckId].numCard + 1,
+              cards: [
+                {
+                  [card.id]: {
+                    id: card.id,
+                    question: card.question,
+                    answer: card.answer,
+                    timeStamp: card.timeStamp
+                  }
+              }]
+            }
+          }
+        }
+
+      } else {
       return {
         ...state,
         decks:{
           ...state.decks,
           [deckId]:{
             ...state.decks[deckId],
-            cards: [...state.decks[deckId].cards].concat(card)
+            numCard: state.decks[deckId].numCard + 1,
+            cards: [
+                ...state.decks[deckId].cards.concat({
+                  [card.id]: {
+                    id: card.id,
+                    question: card.question,
+                    answer: card.answer,
+                    timeStamp: card.timeStamp
+                  }
+              })
+            ]
+            
           }
         }
+      }
       }
     
     

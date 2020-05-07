@@ -7,7 +7,7 @@ class AddCardScreen extends React.Component{
 
     state = {
         questionInput: "question",
-        answerInput: "answer"
+        answerInput: "answer",
     }
 
     generateId(){
@@ -39,8 +39,8 @@ class AddCardScreen extends React.Component{
 
         const card = {
             id: id,
-            question: this.questionInput,
-            answer: this.answerInput,
+            question: this.state.questionInput,
+            answer: this.state.answerInput,
             timeStamp: (new Date()).getTime()
         }
 

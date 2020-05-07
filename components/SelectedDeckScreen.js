@@ -43,7 +43,9 @@ class SelectedDeckScreen extends React.Component{
         
               <Button
                 title="Start Quiz"
-                onPress={() => navigation.push('AnswerQuiz')}
+                onPress={() => navigation.push('AnswerQuiz',{
+                  deckId:deckId
+                })}
               />
         
               

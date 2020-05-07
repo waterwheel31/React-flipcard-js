@@ -6,20 +6,6 @@ import { handleInitialData } from '../actions'
 class DeckListScreen extends React.Component{
 
     state = {
-        decks : [
-            {
-                "id": 0,
-                "name": "deck1",
-            },
-            {
-                "id": 1,
-                "name": "deck2",
-            },
-            {
-                "id": 2,
-                "name": "deck3",
-            }
-          ] ,
         initialized: false
     }
 

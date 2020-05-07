@@ -34,8 +34,14 @@ class AddDeckScreen extends React.Component{
             cards: []
         }
 
-        this.props.addDeck(deck)
-        navigation.navigate('DeckList')
+        const waitForAction = new Promise((res, rej) => {
+            this.props.addDeck(deck)
+            res()
+        })
+        
+        waitForAction.then(()=>{
+            navigation.navigate('DeckList')   
+        })
     }
 
     render(){

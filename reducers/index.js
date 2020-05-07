@@ -25,21 +25,26 @@ export default function decks(state = {}, action) {
       };
 
     case REMOVE_DECK:
-      delete state[action.title];
+      delete state.decks[action.deckId];
       return {
         ...state,
       };
 
     case ADD_CARD:
-      const _title = action.title;
-      const question = action.question;
+      const deckId = action.deckId;
+      const card = action.card;
       return {
         ...state,
-        [_title]: {
-          ...state[_title],
-          questions: [...state[_title].questions].concat(question),
-        },
-      };
+        decks:{
+          ...state.decks,
+          [deckId]:{
+            ...state.decks[deckId],
+            cards: [...state.decks[deckId].cards].concat(card)
+          }
+        }
+      }
+    
+    
     
     case INITIALIZED:
       return {

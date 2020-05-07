@@ -1,8 +1,22 @@
 import React from 'react'
 import { StyleSheet, Text, Button, View } from 'react-native';
 import { connect } from 'react-redux'
+import { removeDeck} from '../actions'
 
 class SelectedDeckScreen extends React.Component{
+
+
+    removeDeck = (e) => {
+
+      const navigation = this.props.navigation
+      const deckId = this.props.route.params.deckId
+      console.log('remove deck:', deckId)
+
+      new Promise (()=>{
+        this.props.removeDeck(deckId)
+      }).then(()=> {navigation.navigate('DeckList')})
+      
+    }
 
     render(){
 
@@ -22,7 +36,9 @@ class SelectedDeckScreen extends React.Component{
               
               <Button
                 title="Add a Card"
-                onPress={() => navigation.push('AddCard')}
+                onPress={() => navigation.push('AddCard', {
+                  deckId:deckId
+                })}
               />
         
               <Button
@@ -38,7 +54,7 @@ class SelectedDeckScreen extends React.Component{
 
               <Button
                 title="Delete This Deck"
-                onPress={() => navigation.push('DeckList')}
+                onPress={this.removeDeck}
               />
             </View>
           );
@@ -53,7 +69,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-      //deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
+      removeDeck: (deckId) => dispatch(removeDeck(deckId)),
       //addCard: (deckId, card) => dispatch(addCard(deckId, card))
   }
 }

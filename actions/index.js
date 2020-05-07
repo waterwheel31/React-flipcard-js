@@ -25,18 +25,20 @@ export function addDeck(deck) {
   };
 }
 
-export function removeDeck(title) {
+export function removeDeck(deckId) {
+  console.log('deck id:', deckId)
   return {
     type: REMOVE_DECK,
-    title,
+    deckId,
   };
 }
 
-export function addCard(title,question) {
+export function addCard(deckId, card) {
+  console.log('action, addCard()')
   return {
     type: ADD_CARD,
-    title,
-    question,
+    deckId,
+    card,
   };
 }
 

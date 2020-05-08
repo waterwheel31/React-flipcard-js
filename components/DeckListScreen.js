@@ -2,11 +2,11 @@ import React from 'react'
 import { StyleSheet, Text, Button, View, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions'
+import styles from '../styles'
 
 class DeckListScreen extends React.Component{
 
     state = {
-        initialized: false
     }
 
 
@@ -29,15 +29,17 @@ class DeckListScreen extends React.Component{
 
         return (
             decks.map((deck)=>(
-                <TouchableOpacity
-                onPress = {()=> navigation.navigate('SelectedDeck',{
-                    deckId:deck.id
-                })}
-                >
-                    <Text>
-                    {deck.name}
-                    </Text>
-                </TouchableOpacity>
+                <View style={StyleSheet.itemContainer}>
+                    <TouchableOpacity
+                    onPress = {()=> navigation.navigate('SelectedDeck',{
+                        deckId:deck.id
+                    })}
+                    >
+                        <Text style={styles.item}>
+                        {deck.name}   (#Cards: {deck.numCard})
+                        </Text>
+                    </TouchableOpacity>
+                </View>
                 ))
         )
     }
@@ -59,12 +61,12 @@ class DeckListScreen extends React.Component{
         
         } else {
                 return (
-                <View>
-                    <Text>Deck List</Text>
+                <View style={styles.container}>
+                    <Text style={styles.header}>Deck List</Text>
                     {this.getDeckList()}
 
-                    <Button
-                        title="Add a Deck"
+                    <Button style={styles.button}
+                        title="Add New Deck"
                         onPress={() => navigation.push('AddDeck')}
                     />
 

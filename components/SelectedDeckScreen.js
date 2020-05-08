@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, Button, View } from 'react-native';
 import { connect } from 'react-redux'
 import { removeDeck} from '../actions'
+import styles from '../styles'
 
 class SelectedDeckScreen extends React.Component{
 
@@ -29,10 +30,10 @@ class SelectedDeckScreen extends React.Component{
         console.log('deckName:', deckName)
         
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <Text>Deck ID: {deckId}</Text>
-              <Text>Deck Name: {deckName}</Text>
-              <Text>Number of Cards: {numCard}</Text>
+            <View style={styles.container}>
+            
+              <Text style={styles.header}>Deck Name: {deckName}</Text>
+              <Text style={styles.item}>Number of Cards: {numCard}</Text>
               
               <Button
                 title="Add a Card"
@@ -41,14 +42,15 @@ class SelectedDeckScreen extends React.Component{
                 })}
               />
         
-              <Button
-                title="Start Quiz"
-                onPress={() => navigation.push('AnswerQuiz',{
-                  deckId:deckId
-                })}
-              />
+              {numCard > 0 ? 
+                <Button
+                  title="Start Quiz"
+                  onPress={() => navigation.push('AnswerQuiz',{
+                    deckId:deckId
+                  })}
+                />
+              : null }
         
-              
               <Button
                 title="Go To Deck List"
                 onPress={() => navigation.push('DeckList')}

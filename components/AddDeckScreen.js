@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, Button, View, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux'
 import { addDeck} from '../actions'
+import styles from '../styles'
 
 
 class AddDeckScreen extends React.Component{ 
@@ -49,11 +50,14 @@ class AddDeckScreen extends React.Component{
         const navigation = this.props.navigation
 
         return(
-            <View>
-                <Text>Add a Deck</Text>
+            <View style = {styles.container} >
+                <Text style = {styles.header}  >
+                    Add a Deck
+                </Text>
 
                 <Text>Deck Name</Text>
-                <TextInput 
+                <TextInput
+                    style = {styles.textInput} 
                     value = {this.state.deckName}
                     label="Deck Name" 
                     variant="outlined"

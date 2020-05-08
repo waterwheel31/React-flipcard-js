@@ -14,18 +14,13 @@ import DeckListScreen from './components/DeckListScreen'
 import SelectedDeckScreen from './components/SelectedDeckScreen'
 import AddCardScreen from './components/AddCardScreen'
 import AnswerQuizScreen from './components/AnswerQuizScreen'
-import NotFoundScreen from './components/NotFoundScreen'
 import AddDeckScreen from './components/AddDeckScreen'
+import styles from './styles'
 
 const store = createStore(reducer, middleware);
 const Stack = createStackNavigator();
 
 class App extends React.Component{
-
-
-  state = {
-
-  }
 
   componentDidMount() {
     console.log('componentDidMount()')
@@ -44,7 +39,6 @@ class App extends React.Component{
             <Stack.Screen name="AddDeck" component={AddDeckScreen} />
             <Stack.Screen name="AddCard" component={AddCardScreen} />
             <Stack.Screen name="AnswerQuiz" component={AnswerQuizScreen} />
-            <Stack.Screen name="NotFound" component={NotFoundScreen} />
           </Stack.Navigator>
        </NavigationContainer>
   
@@ -61,13 +55,5 @@ class App extends React.Component{
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;

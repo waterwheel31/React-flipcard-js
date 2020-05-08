@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, Button, View, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux'
 import { addCard} from '../actions'
+import styles from '../styles'
 
 class AddCardScreen extends React.Component{
 
@@ -55,18 +56,20 @@ class AddCardScreen extends React.Component{
         const navigation = this.props.navigation
 
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <Text>Add a Card</Text>
+            <View style={styles.container}>
+              <Text style={styles.header}>Add a Card</Text>
         
               <Text>Question</Text>
         
               <TextInput 
+                  style = {styles.textInput}
                   value = {this.state.questionInput}
                   onChange = {this.handleQuestionText}
               />
         
               <Text>Answer</Text>
               <TextInput 
+                  style = {styles.textInput}
                   value = {this.state.answerInput}
                   onChange = {this.handleAnswerText}
               />
@@ -74,11 +77,12 @@ class AddCardScreen extends React.Component{
                 title="Add This Card"
                 onPress={this.handleSubmit}
               />     
-              
+
               <Button
                 title="Go To Home"
                 onPress={() => navigation.push('DeckList')}
               />
+              
             </View>
           );
     }

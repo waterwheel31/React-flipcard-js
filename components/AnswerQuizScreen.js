@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, Button, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, Button, View, Card, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux'
+import styles from '../styles'
 
 
 class AnswerQuizScreen extends React.Component{
@@ -30,10 +31,10 @@ class AnswerQuizScreen extends React.Component{
     showResult = ()=>{
         return (
             <View>
-                <Text> Result </Text>
+                <Text style={styles.header}> Result </Text>
                 <Text> Question Answered: {this.state.numAnswered} </Text>
                 <Text> Question Correct: {this.state.numCorrect} </Text>
-                <Text> Correct%: {this.state.numCorrect / this.state.numAnswered} </Text>
+                <Text> Correct ratio: {this.state.numCorrect / this.state.numAnswered * 100 } %</Text>
             </View>
         )
     }
@@ -62,29 +63,42 @@ class AnswerQuizScreen extends React.Component{
     showCard = (cards)=>{
 
         const card = cards[this.state.questionNo]
-        console.log('card:', card)
-        const question = card.question
-        const answer = card.answer
+        const key = Object.keys(card)[0]
+        
+        const question = card[key].question
+        const answer = card[key].answer
 
-        console.log('question:', question, 'answer:', answer)
-
-
+        const deckId = this.props.route.params.deckId
+        const numCard = this.props.decks[deckId].numCard
 
         return (
             <View>
-                <Text> card </Text>
                 
-                <Text> Question: {this.state.questionNo + 1} </Text>
+                <Text style = {styles.header} > 
+                    Question: {this.state.questionNo + 1}
+                 </Text>
+                 <Text style={{textAlign:'right'}}>Remaining: {numCard - this.state.questionNo}  </Text>
 
+            
                 {this.state.side === 'question'
-                    ? <Text> {question} </Text> 
-                    : <Text> {answer}</Text>
+                    ? 
+                    <View> 
+                      <Text  style={styles.card}> {question} </Text> 
+                      <Button
+                            title="Show the Answer"
+                            onPress={this.flip}
+                       />
+                    </View>
+                    : 
+                    <View>
+                         <Text  style={styles.card}> {answer} </Text>
+                         <Button
+                            title="Back to Question"
+                            onPress={this.flip}
+                       />
+                    </View>
                 }
-
-                <Button
-                        title="Flip the Card"
-                        onPress={this.flip}
-                />
+                     
 
                 <Button
                         title="Correct"
@@ -104,7 +118,6 @@ class AnswerQuizScreen extends React.Component{
 
     render(){
 
-    
         const navigation = this.props.navigation
         const deckId = this.props.route.params.deckId
         const numCard = this.props.decks[deckId].numCard
@@ -120,7 +133,7 @@ class AnswerQuizScreen extends React.Component{
 
         if (numCard === undefined){
             return (
-                <View>
+                <View style={styles.container}>
                     <Text>There is no card on this deck. Please add cards before answering the quiz</Text>
                     <Button
                         title="Go To Deck List"
@@ -131,19 +144,20 @@ class AnswerQuizScreen extends React.Component{
             )
         } else{
             return(
-                <View>
-                    <Text>Quiz</Text>
-                    <Text>Deck Number: {deckId}</Text>
-                    
+                <View style={styles.container}>
+                    <View>
                     {this.state.questionNo >= numCard  
                         ? this.showResult()
                         : this.showCard(cards)
                     }
-
-                    <Button
-                        title="Go To Deck List"
-                        onPress={() => navigation.push('DeckList')}
-                    />
+                    </View>
+                    <View>
+                        <Button
+                            title="Go To Deck List"
+                            onPress={() => navigation.push('DeckList')}
+                        />
+                    </View>
+                    
                 </View>
                 
             )

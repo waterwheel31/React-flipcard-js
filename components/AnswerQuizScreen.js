@@ -30,7 +30,8 @@ class AnswerQuizScreen extends React.Component{
     }
 
     showResult = ()=>{
-
+        const navigation = this.props.navigation
+        const deckId = this.props.route.params.deckId
         clearLocalNotification().then(setLocalNotification)
 
         return (
@@ -39,6 +40,12 @@ class AnswerQuizScreen extends React.Component{
                 <Text> Question Answered: {this.state.numAnswered} </Text>
                 <Text> Question Correct: {this.state.numCorrect} </Text>
                 <Text> Correct ratio: {this.state.numCorrect / this.state.numAnswered * 100 } %</Text>
+                <Button
+                    title="Answer Again"
+                    onPress={() => navigation.push('AnswerQuiz',{
+                        deckId:deckId
+                    })}
+                />
             </View>
         )
     }
@@ -135,7 +142,7 @@ class AnswerQuizScreen extends React.Component{
         console.log('number of cards:', numCard)
         console.log('cards:', cards)
 
-        if (numCard === undefined){
+        if (numCard === 0){
             return (
                 <View style={styles.container}>
                     <Text>There is no card on this deck. Please add cards before answering the quiz</Text>

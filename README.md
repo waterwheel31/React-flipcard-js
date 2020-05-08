@@ -14,6 +14,7 @@
 - How to run on a simulator
     - `npm install -g expo-cli`  (skip if expo is already installed)
     - `git clone <the url>`
+    - `npm install` 
     - launch emurator (for example by Android Studio) or connect to a device
     - `npm start` 
     - go to localhost:19002 - Expo would be running 

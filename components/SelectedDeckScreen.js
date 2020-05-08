@@ -26,7 +26,7 @@ class SelectedDeckScreen extends React.Component{
 
     render(){
 
-       console.log('Selected Deck Screen.  props:', this.props)
+        console.log('Selected Deck Screen.  props:', this.props)
         const deckId = this.props.route.params.deckId
         const deckName = this.props.decks[deckId].name
         const numCard = this.props.decks[deckId].numCard
@@ -47,14 +47,14 @@ class SelectedDeckScreen extends React.Component{
                 })}
               />
         
-              {numCard > 0 ? 
-                <Button
-                  title="Start Quiz"
-                  onPress={() => navigation.push('AnswerQuiz',{
-                    deckId:deckId
-                  })}
-                />
-              : null }
+             
+              <Button
+                title="Start Quiz"
+                onPress={() => navigation.push('AnswerQuiz',{
+                  deckId:deckId
+                })}
+              />
+           
         
               <Button
                 title="Go To Deck List"

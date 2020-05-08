@@ -47,7 +47,9 @@ class AddCardScreen extends React.Component{
 
         console.log('addCard. card:', card)
         this.props.addCard(deckId, card)
-        navigation.navigate('DeckList')
+        navigation.navigate('SelectedDeck',{
+          deckId:deckId
+         })
     }
 
 

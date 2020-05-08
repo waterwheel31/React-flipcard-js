@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, Button, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, Button, View, TouchableOpacity, Animated } from 'react-native';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions'
 import styles from '../styles'
@@ -7,12 +7,17 @@ import styles from '../styles'
 class DeckListScreen extends React.Component{
 
     state = {
+        fontSize: new Animated.Value(20)
     }
 
 
     initialzeDeckList(){
         this.props.handleInitialData()
         //console.log('props:', this.props)
+    }
+
+    handleClick(){
+        Aminated
     }
 
     getDeckList(){
@@ -24,6 +29,7 @@ class DeckListScreen extends React.Component{
         }
 
         const navigation = this.props.navigation
+        const fontSize = this.state.fontSize
 
         console.log('getDeckList()')
 

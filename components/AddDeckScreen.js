@@ -8,7 +8,7 @@ import styles from '../styles'
 class AddDeckScreen extends React.Component{ 
 
     state = {
-        deckName: "deck name",
+        deckName: "",
     }
 
     generateId(){

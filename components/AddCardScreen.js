@@ -7,8 +7,8 @@ import styles from '../styles'
 class AddCardScreen extends React.Component{
 
     state = {
-        questionInput: "question",
-        answerInput: "answer",
+        questionInput: "",
+        answerInput: "",
     }
 
     generateId(){
@@ -62,6 +62,7 @@ class AddCardScreen extends React.Component{
               <Text>Question</Text>
         
               <TextInput 
+                  multiline={true}
                   style = {styles.textInput}
                   value = {this.state.questionInput}
                   onChange = {this.handleQuestionText}
@@ -69,6 +70,7 @@ class AddCardScreen extends React.Component{
         
               <Text>Answer</Text>
               <TextInput 
+                  multiline={true}
                   style = {styles.textInput}
                   value = {this.state.answerInput}
                   onChange = {this.handleAnswerText}

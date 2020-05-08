@@ -13,9 +13,14 @@ class SelectedDeckScreen extends React.Component{
       const deckId = this.props.route.params.deckId
       console.log('remove deck:', deckId)
 
-      new Promise (()=>{
+      const waitForAction = new Promise ((res, rej)=>{
         this.props.removeDeck(deckId)
-      }).then(()=> {navigation.navigate('DeckList')})
+        res()
+      })
+
+      waitForAction.then(()=>{
+        navigation.push('DeckList')}
+      )
       
     }
 

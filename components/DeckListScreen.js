@@ -10,6 +10,9 @@ class DeckListScreen extends React.Component{
         fontSize: 15
     }
 
+    componentDidMount () {
+        
+      }
 
     initialzeDeckList(){
         this.props.handleInitialData()
@@ -22,30 +25,36 @@ class DeckListScreen extends React.Component{
 
     getDeckList(){
 
-        //const decks = this.state.decks
-        let decks = []
+        
+        let decks = this.props.decks
         if (this.props.decks !== null || this.props.decks !== undefined){
             decks = Object.values(this.props.decks)
         }
 
+
         const navigation = this.props.navigation
         let fontSize = this.state.fontSize
 
-        console.log('getDeckList()')
-        console.log('fontSize:', fontSize)
+        console.log('decks:', decks)
 
         return (
             decks.map((deck)=>(
-                <View style={styles.itemContainer}>
-                    <TouchableOpacity
-                    onPress = {()=> navigation.navigate('SelectedDeck',{
-                        deckId:deck.id
-                    })}
-                    >
-                        <Text style={{...styles.item, fontSize:fontSize}}>
-                        {deck.name}   (#Cards: {deck.numCard})
-                        </Text>
-                    </TouchableOpacity>
+                
+                <View style={styles.itemContainer} key={deck.id}>
+                    {deck.id !== undefined 
+                      ?
+                        <TouchableOpacity
+                        key={deck.id}
+                        onPress = {()=> navigation.navigate('SelectedDeck',{
+                            deckId:deck.id
+                        })}
+                        >
+                            <Text style={{...styles.item, fontSize:fontSize}}>
+                            {deck.name}   (#Cards: {deck.numCard})
+                            </Text>
+                        </TouchableOpacity>
+                      : null
+                    }
                 </View>
                 ))
         )
@@ -53,7 +62,7 @@ class DeckListScreen extends React.Component{
     
     render(){
 
-        const decks = this.state.decks
+        const decks = this.props.decks
       
         //console.log('Deck List Screen, props:', this.props)
         const navigation = this.props.navigation

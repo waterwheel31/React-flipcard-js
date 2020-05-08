@@ -1,5 +1,5 @@
 import React, {useRef} from 'react'
-import { StyleSheet, Text, Button, View, TouchableOpacity, Animated } from 'react-native';
+import { StyleSheet, Text, Button, View, TouchableOpacity, Animated, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions'
 import styles from '../styles'
@@ -7,7 +7,7 @@ import styles from '../styles'
 class DeckListScreen extends React.Component{
 
     state = {
-        fontSize: new Animated.Value(15)
+        fontSize: 15
     }
 
 
@@ -36,7 +36,7 @@ class DeckListScreen extends React.Component{
 
         return (
             decks.map((deck)=>(
-                <View style={StyleSheet.itemContainer}>
+                <View style={styles.itemContainer}>
                     <TouchableOpacity
                     onPress = {()=> navigation.navigate('SelectedDeck',{
                         deckId:deck.id

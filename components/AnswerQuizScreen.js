@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, Button, View, Card, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux'
 import styles from '../styles'
+import {clearLocalNotification, setLocalNotification} from '../notification'
 
 
 class AnswerQuizScreen extends React.Component{
@@ -29,6 +30,9 @@ class AnswerQuizScreen extends React.Component{
     }
 
     showResult = ()=>{
+
+        clearLocalNotification().then(setLocalNotification)
+
         return (
             <View>
                 <Text style={styles.header}> Result </Text>

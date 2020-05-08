@@ -16,6 +16,7 @@ import AddCardScreen from './components/AddCardScreen'
 import AnswerQuizScreen from './components/AnswerQuizScreen'
 import AddDeckScreen from './components/AddDeckScreen'
 import styles from './styles'
+import {setLocalNotification} from './notification'
 
 const store = createStore(reducer, middleware);
 const Stack = createStackNavigator();
@@ -24,6 +25,7 @@ class App extends React.Component{
 
   componentDidMount() {
     console.log('componentDidMount()')
+    setLocalNotification()
   }
 
   getNavigationContainer = ()=>{
@@ -41,6 +43,7 @@ class App extends React.Component{
             <Stack.Screen name="AnswerQuiz" component={AnswerQuizScreen} />
           </Stack.Navigator>
        </NavigationContainer>
+       
   
       );
   }

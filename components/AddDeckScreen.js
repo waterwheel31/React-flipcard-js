@@ -27,6 +27,7 @@ class AddDeckScreen extends React.Component{
     handleSubmit = (e)=>{
         const navigation = this.props.navigation
         const id = this.generateId()
+        
 
         const deck = {
             id: id,
@@ -41,7 +42,9 @@ class AddDeckScreen extends React.Component{
         })
         
         waitForAction.then(()=>{
-            navigation.navigate('DeckList')   
+            navigation.navigate('SelectedDeck',{
+                deckId:id
+               }) 
         })
     }
 

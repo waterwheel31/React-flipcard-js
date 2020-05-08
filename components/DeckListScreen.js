@@ -18,12 +18,17 @@ class DeckListScreen extends React.Component{
         this.props.handleInitialData()
     }
 
-    handleClick = ()=>{
+    handleClick = (deck)=>{
+        const navigation = this.props.navigation
         console.log('handleClick')
         Animated.timing(this.state.fontSize, {
-              toValue: 25,
+              toValue: 18,
               duration: 200,
-            }).start();
+            }).start(({finished})=>{
+                navigation.navigate('SelectedDeck',{
+                    deckId:deck.id
+                })
+            });
         console.log('handleClick')
     };
 
@@ -35,8 +40,6 @@ class DeckListScreen extends React.Component{
             decks = Object.values(this.props.decks)
         }
 
-
-        const navigation = this.props.navigation
         let fontSize = this.state.fontSize
 
         console.log('decks:', decks)
@@ -49,10 +52,7 @@ class DeckListScreen extends React.Component{
                       ?
                         <TouchableOpacity
                         key={deck.id}
-                        
-                        onPress = {()=> {this.handleClick; navigation.navigate('SelectedDeck',{
-                            deckId:deck.id
-                        })}}
+                        onPress = {()=> this.handleClick(deck)}
     
                         >
                             <Animated.Text style={{...styles.item, fontSize:fontSize}}>

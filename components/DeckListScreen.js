@@ -7,7 +7,7 @@ import styles from '../styles'
 class DeckListScreen extends React.Component{
 
     state = {
-        fontSize: 15
+        fontSize: new Animated.Value(15)
     }
 
     componentDidMount () {
@@ -16,12 +16,16 @@ class DeckListScreen extends React.Component{
 
     initialzeDeckList(){
         this.props.handleInitialData()
-        //console.log('props:', this.props)
     }
 
-    handleClick(){
-        Aminated
-    }
+    handleClick = ()=>{
+        console.log('handleClick')
+        Animated.timing(this.state.fontSize, {
+              toValue: 25,
+              duration: 200,
+            }).start();
+        console.log('handleClick')
+    };
 
     getDeckList(){
 
@@ -45,13 +49,15 @@ class DeckListScreen extends React.Component{
                       ?
                         <TouchableOpacity
                         key={deck.id}
-                        onPress = {()=> navigation.navigate('SelectedDeck',{
+                        
+                        onPress = {()=> {this.handleClick; navigation.navigate('SelectedDeck',{
                             deckId:deck.id
-                        })}
+                        })}}
+    
                         >
-                            <Text style={{...styles.item, fontSize:fontSize}}>
+                            <Animated.Text style={{...styles.item, fontSize:fontSize}}>
                             {deck.name}   (#Cards: {deck.numCard})
-                            </Text>
+                            </Animated.Text>
                         </TouchableOpacity>
                       : null
                     }

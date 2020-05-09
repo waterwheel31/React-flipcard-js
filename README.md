@@ -1,5 +1,7 @@
 # React-Native Flipcard App 
 
+<img src='./video.gif' width=350>
+
 - What is this? 
     - This a simple flipcard app using React Native
     - This allows usr to add, use, or delete a flip card to folders
